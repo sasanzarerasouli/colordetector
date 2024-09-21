@@ -1,11 +1,4 @@
-<div>
-    <button id="zoomIn">Zoom In</button>
-    <button id="zoomOut">Zoom Out</button>
-</div>
-<canvas id="canvas"></canvas>
-<div id="colorInfo"></div>
 
-<script>
 const imageUpload = document.getElementById('imageUpload');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
