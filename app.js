@@ -4,24 +4,47 @@ const ctx = canvas.getContext('2d');
 const colorInfo = document.getElementById('colorInfo');
 
 // Helper function to get color name from RGB values
-function getColorName(r, g, b) {
-    if (r > g && r > b) {
-        return 'Red';
-    } else if (g > r && g > b) {
-        return 'Green';
-    } else if (b > r && b > g) {
-        return 'Blue';
-    } else if (r === g && g === b) {
-        return 'Gray';
-    } else if (r === g) {
-        return 'Yellow';
-    } else if (g === b) {
-        return 'Cyan';
-    } else if (r === b) {
-        return 'Magenta';
+function rgbToHsv(r, g, b) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b);
+    let h, s, v = max;
+
+    const d = max - min;
+    s = max === 0 ? 0 : d / max;
+
+    if (max === min) {
+        h = 0; // achromatic
     } else {
-        return 'Color';
+        switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
     }
+    return [h * 360, s * 100, v * 100]; // Return HSV values
+}
+
+function getColorName(r, g, b) {
+    const [h, s, v] = rgbToHsv(r, g, b);
+
+    // Determine color based on HSV values
+    if (v < 20) return 'Black'; // Dark colors
+    if (v > 80 && s < 10) return 'White'; // Light colors
+
+    // Hue ranges for different colors
+    if (h >= 0 && h < 15) return 'Red'; // Reds
+    if (h >= 15 && h < 45) return 'Orange'; // Oranges
+    if (h >= 45 && h < 75) return 'Yellow'; // Yellows
+    if (h >= 75 && h < 165) return 'Green'; // Greens
+    if (h >= 165 && h < 240) return 'Blue'; // Blues
+    if (h >= 240 && h < 300) return 'Purple'; // Purples
+    if (h >= 300 && h < 360) return 'Pink'; // Pinks
+
+    return 'Color'; // For other combinations
 }
 
 // Event when image is uploaded
