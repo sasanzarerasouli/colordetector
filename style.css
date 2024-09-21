@@ -1,0 +1,94 @@
+/* تم مشکی و ریسپانسیو */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #00FF00; /* رنگ سبز برای تیتر */
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #00FF00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+canvas {
+    border: 2px solid #00FF00;
+    max-width: 100%;
+    max-height: 400px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#colorInfo {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+footer p {
+    color: #AAAAAA;
+}
+
+footer p strong {
+    color: #00FF00;
+}
+
+/* برای موبایل */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    canvas {
+        max-height: 250px;
+    }
+
+    #colorInfo {
+        font-size: 16px;
+    }
+}
+
+/* برای دسکتاپ */
+@media (min-width: 601px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    canvas {
+        max-height: 500px;
+    }
+
+    #colorInfo {
+        font-size: 20px;
+    }
+}
