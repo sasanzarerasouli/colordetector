@@ -60,24 +60,47 @@ imageUpload.addEventListener('change', function (e) {
     reader.readAsDataURL(file);
 });
 
+// Event when image is uploaded
+imageUpload.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+            // Set canvas dimensions
+            const aspectRatio = img.width / img.height;
+            if (img.width > img.height) {
+                canvas.width = 400; // Set your desired width
+                canvas.height = 400 / aspectRatio; // Adjust height according to aspect ratio
+            } else {
+                canvas.height = 400; // Set your desired height
+                canvas.width = 400 * aspectRatio; // Adjust width according to aspect ratio
+            }
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+        img.src = event.target.result;
+    };
+    
+    reader.readAsDataURL(file);
+});
+
 // Event when clicking on the image
 canvas.addEventListener('click', function (e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Get the image dimensions
-    const imgWidth = canvas.width;
-    const imgHeight = canvas.height;
+    // Get the original image dimensions
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const scaleX = imgData.width / canvas.width;
+    const scaleY = imgData.height / canvas.height;
 
-    // Calculate the scale ratio
-    const scaleX = imgWidth / rect.width;
-    const scaleY = imgHeight / rect.height;
-
-    // Adjust x and y based on scale ratio
+    // Adjust x and y based on scale
     const adjustedX = Math.floor(x * scaleX);
     const adjustedY = Math.floor(y * scaleY);
 
+    // Get color data
     const imageData = ctx.getImageData(adjustedX, adjustedY, 1, 1).data;
     const r = imageData[0];
     const g = imageData[1];
