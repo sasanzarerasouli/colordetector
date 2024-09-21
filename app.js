@@ -66,7 +66,19 @@ canvas.addEventListener('click', function (e) {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const imageData = ctx.getImageData(x, y, 1, 1).data;
+    // Get the image dimensions
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+    // Calculate the scale ratio
+    const scaleX = imgWidth / rect.width;
+    const scaleY = imgHeight / rect.height;
+
+    // Adjust x and y based on scale ratio
+    const adjustedX = Math.floor(x * scaleX);
+    const adjustedY = Math.floor(y * scaleY);
+
+    const imageData = ctx.getImageData(adjustedX, adjustedY, 1, 1).data;
     const r = imageData[0];
     const g = imageData[1];
     const b = imageData[2];
