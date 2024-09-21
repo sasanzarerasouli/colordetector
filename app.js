@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colorInfo = document.getElementById('colorInfo');
 
-// Dictionary to map RGB values to color names (simplified for common colors)
+// Expanded color dictionary to map RGB values to color names (more comprehensive)
 const colorNames = {
     '255,0,0': 'Red',
     '0,255,0': 'Green',
@@ -19,13 +19,27 @@ const colorNames = {
     '0,128,0': 'Dark Green',
     '128,0,128': 'Purple',
     '0,128,128': 'Teal',
-    '0,0,128': 'Navy'
+    '0,0,128': 'Navy',
+    '192,192,192': 'Silver',
+    '255,165,0': 'Orange',
+    '173,216,230': 'Light Blue',
+    '0,191,255': 'Deep Sky Blue',
+    '75,0,130': 'Indigo',
+    '255,20,147': 'Deep Pink',
+    '46,139,87': 'Sea Green',
+    '255,215,0': 'Gold',
+    '218,165,32': 'Goldenrod',
+    '220,20,60': 'Crimson',
+    '233,150,122': 'Dark Salmon',
+    '153,50,204': 'Dark Orchid',
+    '106,90,205': 'Slate Blue',
+    '50,205,50': 'Lime Green'
 };
 
 // Helper function to get color name from RGB values
 function getColorName(r, g, b) {
     const rgbString = `${r},${g},${b}`;
-    return colorNames[rgbString] || `rgb(${r}, ${g}, ${b})`; // Default to RGB code if no match
+    return colorNames[rgbString] || 'Unknown Color'; // Show 'Unknown Color' if no match is found
 }
 
 // Event when image is uploaded
