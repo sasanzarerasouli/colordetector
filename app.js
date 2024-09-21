@@ -85,18 +85,45 @@ imageUpload.addEventListener('change', function (e) {
     reader.readAsDataURL(file);
 });
 
+let img; // Declare img globally to use in click event
+
+// Event when image is uploaded
+imageUpload.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(event) {
+        img = new Image();
+        img.onload = function() {
+            // Set canvas dimensions
+            const aspectRatio = img.width / img.height;
+            const desiredSize = 400; // Set your desired size
+            if (img.width > img.height) {
+                canvas.width = desiredSize;
+                canvas.height = desiredSize / aspectRatio;
+            } else {
+                canvas.height = desiredSize;
+                canvas.width = desiredSize * aspectRatio;
+            }
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+        img.src = event.target.result;
+    };
+    
+    reader.readAsDataURL(file);
+});
+
 // Event when clicking on the image
 canvas.addEventListener('click', function (e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Get the original image dimensions
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const scaleX = imgData.width / canvas.width;
-    const scaleY = imgData.height / canvas.height;
+    // Calculate the scale factor
+    const scaleX = img.width / canvas.width;
+    const scaleY = img.height / canvas.height;
 
-    // Adjust x and y based on scale
+    // Adjust x and y based on the scale
     const adjustedX = Math.floor(x * scaleX);
     const adjustedY = Math.floor(y * scaleY);
 
