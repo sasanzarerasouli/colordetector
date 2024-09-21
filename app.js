@@ -31,20 +31,25 @@ function rgbToHsv(r, g, b) {
 function getColorName(r, g, b) {
     const [h, s, v] = rgbToHsv(r, g, b);
 
-    // Determine color based on HSV values
-    if (v < 20) return 'Black'; // Dark colors
-    if (v > 80 && s < 10) return 'White'; // Light colors
+    // First check for grayscale colors (black, white, gray)
+    if (v < 15) return 'Black'; // Very dark colors
+    if (v > 85 && s < 10) return 'White'; // Very light colors
+    if (v >= 15 && v <= 85 && s < 20) return 'Gray'; // Mid brightness, low saturation
 
-    // Hue ranges for different colors
+    // Hue ranges for specific colors
     if (h >= 0 && h < 15) return 'Red'; // Reds
     if (h >= 15 && h < 45) return 'Orange'; // Oranges
-    if (h >= 45 && h < 75) return 'Yellow'; // Yellows
-    if (h >= 75 && h < 165) return 'Green'; // Greens
-    if (h >= 165 && h < 240) return 'Blue'; // Blues
-    if (h >= 240 && h < 300) return 'Purple'; // Purples
-    if (h >= 300 && h < 360) return 'Pink'; // Pinks
+    if (h >= 45 && h < 65) return 'Yellow'; // Yellows
+    if (h >= 65 && h < 150) return 'Green'; // Greens
+    if (h >= 150 && h < 240) return 'Blue'; // Blues
+    if (h >= 240 && h < 285) return 'Purple'; // Purples
+    if (h >= 285 && h < 330) return 'Pink'; // Pinks
+    if (h >= 330 && h < 360) return 'Red'; // Reds (again)
 
-    return 'Color'; // For other combinations
+    // If none of the above, we assume brown for medium saturations and low brightness
+    if (s > 20 && v < 60) return 'Brown'; // Low brightness, moderate saturation
+
+    return 'Color'; // Fallback for other combinations
 }
 
 // Event when image is uploaded
