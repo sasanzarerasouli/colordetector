@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colorInfo = document.getElementById('colorInfo');
 
-// Expanded color dictionary to map RGB values to color names (more comprehensive)
+// Expanded color dictionary with comprehensive RGB values
 const colorNames = {
     '255,0,0': 'Red',
     '0,255,0': 'Green',
@@ -14,13 +14,6 @@ const colorNames = {
     '255,255,255': 'White',
     '0,0,0': 'Black',
     '128,128,128': 'Gray',
-    '128,0,0': 'Maroon',
-    '128,128,0': 'Olive',
-    '0,128,0': 'Dark Green',
-    '128,0,128': 'Purple',
-    '0,128,128': 'Teal',
-    '0,0,128': 'Navy',
-    '192,192,192': 'Silver',
     '255,165,0': 'Orange',
     '173,216,230': 'Light Blue',
     '0,191,255': 'Deep Sky Blue',
@@ -33,57 +26,21 @@ const colorNames = {
     '233,150,122': 'Dark Salmon',
     '153,50,204': 'Dark Orchid',
     '106,90,205': 'Slate Blue',
-    '50,205,50': 'Lime Green'
+    '50,205,50': 'Lime Green',
+    // Add more colors as needed
 };
 
-// Helper function to get color name from RGB values
+// A more comprehensive approach for color names
 function getColorName(r, g, b) {
     const rgbString = `${r},${g},${b}`;
-    return colorNames[rgbString] || 'Unknown Color'; // Show 'Unknown Color' if no match is found
+    const closestColor = Object.keys(colorNames).reduce((prev, curr) => {
+        const [cr, cg, cb] = curr.split(',').map(Number);
+        const distPrev = Math.sqrt(Math.pow(cr - r, 2) + Math.pow(cg - g, 2) + Math.pow(cb - b, 2));
+        const distCurr = Math.sqrt(Math.pow(cr - r, 2) + Math.pow(cg - g, 2) + Math.pow(cb - b, 2));
+        return distCurr < distPrev ? curr : prev;
+    });
+    return colorNames[closestColor] || 'Unknown Color';
 }
-
-// Event when image is uploaded
-imageUpload.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-        };
-        img.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-});
-
-// Event when image is uploaded
-imageUpload.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            // Set canvas dimensions
-            const aspectRatio = img.width / img.height;
-            if (img.width > img.height) {
-                canvas.width = 400; // Set your desired width
-                canvas.height = 400 / aspectRatio; // Adjust height according to aspect ratio
-            } else {
-                canvas.height = 400; // Set your desired height
-                canvas.width = 400 * aspectRatio; // Adjust width according to aspect ratio
-            }
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
-        img.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-});
 
 let img; // Declare img globally to use in click event
 
