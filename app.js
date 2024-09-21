@@ -3,8 +3,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colorInfo = document.getElementById('colorInfo');
 
-// Expanded color dictionary to map RGB values to color names (more comprehensive)
-const colorNames = {
+// Helper function to get color name from RGB values
+function getColorName(r, g, b) {
     if (r > g && r > b) {
         return 'Red';
     } else if (g > r && g > b) {
@@ -20,14 +20,8 @@ const colorNames = {
     } else if (r === b) {
         return 'Magenta';
     } else {
-        return 'unknown color';
-}
-};
-
-// Helper function to get color name from RGB values
-function getColorName(r, g, b) {
-    const rgbString = `${r},${g},${b}`;
-    return colorNames[rgbString] || 'Unknown Color'; // Show 'Unknown Color' if no match is found
+        return 'Color';
+    }
 }
 
 // Event when image is uploaded
@@ -61,16 +55,13 @@ canvas.addEventListener('click', function (e) {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Get the original image dimensions
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const scaleX = imgData.width / canvas.width;
     const scaleY = imgData.height / canvas.height;
 
-    // Adjust x and y based on scale
     const adjustedX = Math.floor(x * scaleX);
     const adjustedY = Math.floor(y * scaleY);
 
-    // Get color data
     const imageData = ctx.getImageData(adjustedX, adjustedY, 1, 1).data;
     const r = imageData[0];
     const g = imageData[1];
