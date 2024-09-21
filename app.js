@@ -5,7 +5,6 @@ const colorInfo = document.getElementById('colorInfo');
 
 // Expanded color dictionary to map RGB values to color names (more comprehensive)
 const colorNames = {
-function getColorName(r, g, b) {
     if (r > g && r > b) {
         return 'Red';
     } else if (g > r && g > b) {
@@ -22,7 +21,6 @@ function getColorName(r, g, b) {
         return 'Magenta';
     } else {
         return 'unknown color';
-    }
 }
 };
 
