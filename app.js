@@ -48,51 +48,6 @@ imageUpload.addEventListener('change', function (e) {
     const reader = new FileReader();
     
     reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-        };
-        img.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-});
-
-// Event when image is uploaded
-imageUpload.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            // Set canvas dimensions
-            const aspectRatio = img.width / img.height;
-            if (img.width > img.height) {
-                canvas.width = 400; // Set your desired width
-                canvas.height = 400 / aspectRatio; // Adjust height according to aspect ratio
-            } else {
-                canvas.height = 400; // Set your desired height
-                canvas.width = 400 * aspectRatio; // Adjust width according to aspect ratio
-            }
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
-        img.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-});
-
-let img; // Declare img globally to use in click event
-
-// Event when image is uploaded
-imageUpload.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
         img = new Image();
         img.onload = function() {
             // Set canvas dimensions
