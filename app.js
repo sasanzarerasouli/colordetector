@@ -1,4 +1,3 @@
-
 const imageUpload = document.getElementById('imageUpload');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
@@ -83,9 +82,11 @@ canvas.addEventListener('click', function (e) {
     const scaleX = imgData.width / canvas.width;
     const scaleY = imgData.height / canvas.height;
 
-    const adjustedX = Math.floor(x * scaleX);
-    const adjustedY = Math.floor(y * scaleY);
+    // Calculate the adjusted coordinates based on the aspect ratio
+    const adjustedX = Math.floor(x * (imgData.width / canvas.width));
+    const adjustedY = Math.floor(y * (imgData.height / canvas.height));
 
+    // Get the color data from the image
     const imageData = ctx.getImageData(adjustedX, adjustedY, 1, 1).data;
     const r = imageData[0];
     const g = imageData[1];
