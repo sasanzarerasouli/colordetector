@@ -48,17 +48,16 @@ imageUpload.addEventListener('change', function (e) {
     const reader = new FileReader();
     
     reader.onload = function(event) {
-        img = new Image();
+        const img = new Image();
         img.onload = function() {
             // Set canvas dimensions
             const aspectRatio = img.width / img.height;
-            const desiredSize = 400; // Set your desired size
             if (img.width > img.height) {
-                canvas.width = desiredSize;
-                canvas.height = desiredSize / aspectRatio;
+                canvas.width = 400; // Set your desired width
+                canvas.height = 400 / aspectRatio; // Adjust height according to aspect ratio
             } else {
-                canvas.height = desiredSize;
-                canvas.width = desiredSize * aspectRatio;
+                canvas.height = 400; // Set your desired height
+                canvas.width = 400 * aspectRatio; // Adjust width according to aspect ratio
             }
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         };
@@ -74,11 +73,12 @@ canvas.addEventListener('click', function (e) {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Calculate the scale factor
-    const scaleX = img.width / canvas.width;
-    const scaleY = img.height / canvas.height;
+    // Get the original image dimensions
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const scaleX = imgData.width / canvas.width;
+    const scaleY = imgData.height / canvas.height;
 
-    // Adjust x and y based on the scale
+    // Adjust x and y based on scale
     const adjustedX = Math.floor(x * scaleX);
     const adjustedY = Math.floor(y * scaleY);
 
