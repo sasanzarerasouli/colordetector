@@ -37,16 +37,27 @@ function getColorName(r, g, b) {
     if (v >= 15 && v <= 85 && s < 20) return 'Gray'; // Mid brightness, low saturation
 
     // Hue ranges for specific colors
-    if (h >= 0 && h < 15) return 'Red'; // Reds
-    if (h >= 15 && h < 45) return 'Orange'; // Oranges
-    if (h >= 45 && h < 65) return 'Yellow'; // Yellows
-    if (h >= 65 && h < 150) return 'Green'; // Greens
-    if (h >= 150 && h < 240) return 'Blue'; // Blues
-    if (h >= 240 && h < 285) return 'Purple'; // Purples
-    if (h >= 285 && h < 330) return 'Pink'; // Pinks
-    if (h >= 330 && h < 360) return 'Red'; // Reds (again)
-    if (h >= 10 && h < 30 && s >= 0.3 && s < 0.7 && v >= 0.2 && v < 0.6) return 'Brown'; // Browns
-
+    // Reds
+    if ((h >= 0 && h < 15) || (h >= 330 && h < 360)) return 'Red';
+    // Browns (based on specific saturation and value ranges)
+    if (h >= 10 && h < 30 && s >= 0.3 && s < 0.7 && v >= 0.2 && v < 0.6) return 'Brown';
+    // Oranges
+    if (h >= 15 && h < 45 && !(s >= 0.3 && s < 0.7 && v >= 0.2 && v < 0.6)) return 'Orange';
+    // Yellows
+    if (h >= 45 && h < 65) return 'Yellow';
+    // Greens
+    if (h >= 65 && h < 150) return 'Green';
+    // Cyans
+    if (h >= 150 && h < 180) return 'Cyan';
+    // Blues
+    if (h >= 180 && h < 240) return 'Blue';
+    // Purples
+    if (h >= 240 && h < 285) return 'Purple';
+    // Pinks
+    if (h >= 285 && h < 330) return 'Pink';
+    // Default (if no match found)
+    return 'Unknown';
+    
     // If none of the above, we assume brown for medium saturations and low brightness
     if (s > 20 && v < 60) return 'Brown'; // Low brightness, moderate saturation
 
