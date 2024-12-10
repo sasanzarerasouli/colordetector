@@ -45,6 +45,7 @@ function getColorName(r, g, b) {
     if (h >= 240 && h < 285) return 'Purple'; // Purples
     if (h >= 285 && h < 330) return 'Pink'; // Pinks
     if (h >= 330 && h < 360) return 'Red'; // Reds (again)
+    if (h >= 10 && h < 30 && s >= 0.3 && s < 0.7 && v >= 0.2 && v < 0.6) return 'Brown'; // Browns
 
     // If none of the above, we assume brown for medium saturations and low brightness
     if (s > 20 && v < 60) return 'Brown'; // Low brightness, moderate saturation
