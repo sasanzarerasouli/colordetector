@@ -1,4 +1,4 @@
-/* تم مشکی و ریسپانسیو */
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-    color: #00FF00; /* رنگ سبز برای تیتر */
+    color: #00FF00; 
 }
 
 .container {
@@ -63,7 +63,7 @@ footer p strong {
     color: #00FF00;
 }
 
-/* برای موبایل */
+/* monile mode */
 @media (max-width: 600px) {
     h1 {
         font-size: 24px;
@@ -78,7 +78,7 @@ footer p strong {
     }
 }
 
-/* برای دسکتاپ */
+/* desktop mode */
 @media (min-width: 601px) {
     h1 {
         font-size: 32px;
