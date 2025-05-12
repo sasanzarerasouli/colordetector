@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colorInfo = document.getElementById('colorInfo');
 
-// Helper function to get color name from RGB values
+
 function rgbToHsv(r, g, b) {
     r /= 255;
     g /= 255;
@@ -31,12 +31,12 @@ function rgbToHsv(r, g, b) {
 function getColorName(r, g, b) {
     const [h, s, v] = rgbToHsv(r, g, b);
 
-    // First check for grayscale colors (black, white, gray)
+   
     if (v < 15) return 'Black'; // Very dark colors
     if (v > 85 && s < 10) return 'White'; // Very light colors
     if (v >= 15 && v <= 85 && s < 20) return 'Gray'; // Mid brightness, low saturation
 
-    // Hue ranges for specific colors
+  
     // Reds
     if ((h >= 0 && h < 15) || (h >= 330 && h < 360)) return 'Red';
     // Browns (based on specific saturation and value ranges)
@@ -55,16 +55,16 @@ function getColorName(r, g, b) {
     if (h >= 240 && h < 285) return 'Purple';
     // Pinks
     if (h >= 285 && h < 330) return 'Pink';
-    // Default (if no match found)
+    //no match
     return 'Unknown';
     
-    // If none of the above, we assume brown for medium saturations and low brightness
+   //Brown
     if (s > 20 && v < 60) return 'Brown'; // Low brightness, moderate saturation
 
     return 'Color'; // Fallback for other combinations
 }
 
-// Event when image is uploaded
+
 imageUpload.addEventListener('change', function (e) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -89,7 +89,7 @@ imageUpload.addEventListener('change', function (e) {
     reader.readAsDataURL(file);
 });
 
-// Event when clicking on the image
+
 canvas.addEventListener('click', function (e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -99,11 +99,11 @@ canvas.addEventListener('click', function (e) {
     const scaleX = imgData.width / canvas.width;
     const scaleY = imgData.height / canvas.height;
 
-    // Calculate the adjusted coordinates based on the aspect ratio
+   
     const adjustedX = Math.floor(x * (imgData.width / canvas.width));
     const adjustedY = Math.floor(y * (imgData.height / canvas.height));
 
-    // Get the color data from the image
+
     const imageData = ctx.getImageData(adjustedX, adjustedY, 1, 1).data;
     const r = imageData[0];
     const g = imageData[1];
