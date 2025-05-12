@@ -113,3 +113,5 @@ canvas.addEventListener('click', function (e) {
     colorInfo.textContent = `Clicked Color: ${colorName}`;
     colorInfo.style.color = `rgb(${r}, ${g}, ${b})`;
 });
+
+//sasanzarerasouli
