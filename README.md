@@ -4,3 +4,4 @@
 //web page available for desktop mode and mobile mode.
 //every function on cloud.
 //not used memmory.
+//not used storage and history.
