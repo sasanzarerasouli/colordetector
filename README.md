@@ -9,7 +9,7 @@
 ---------------------------------------------------------------------------------------------------------------
 The birth of this application comes with a story—and in the following section, I’ll be sharing that story with you.
 
-#story
+# story
 
 As someone with color blindness, I’ve faced unique challenges in my role providing after-sales service for X-ray imaging equipment. Early in my career, I encountered teasing and mockery due to my condition, which made certain tasks more difficult. Determined to address this with a practical and cost-effective solution, I came up with an idea: create a simple, accessible application that can identify colors from images.
 
