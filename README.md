@@ -1,11 +1,12 @@
 # colordetector
-//a function for helping people with color blindness for detect true color.
-//powered by sasan zare rasouli.
-//web page available for desktop mode and mobile mode.
-//every function on cloud.
-//not used memmory.
-//not used storage and history.
----------------------------------------------------------------------------------------
+- a function for helping people with color blindness for detect true color.
+- powered by sasan zare rasouli.
+- web page available for desktop mode and mobile mode.
+- every function on cloud.
+- not used memmory.
+- not used storage and history.
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 The birth of this application comes with a story—and in the following section, I’ll be sharing that story with you.
 
 #story
